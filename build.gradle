@@ -35,7 +35,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile('net.dv8tion:JDA:3.8.1_437') {
+    compile('net.dv8tion:JDA:3.8.0_423') {
         exclude module: 'opus-java'
     }
 }

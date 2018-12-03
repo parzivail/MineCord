@@ -1,0 +1,16 @@
+[
+{
+  "modid": "minecord",
+  "name": "MineCord",
+  "description": "Minecraft Server <-> Discord interop",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["parzivail"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

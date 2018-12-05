@@ -34,10 +34,9 @@ minecraft {
 repositories {
     jcenter()
 }
+
 dependencies {
-    compile('net.dv8tion:JDA:3.8.0_423') {
-        exclude module: 'opus-java'
-    }
+    compile "com.discord4j:Discord4J:2.10.1"
 }
 
 processResources

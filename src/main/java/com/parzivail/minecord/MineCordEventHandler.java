@@ -4,10 +4,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.ServerChatEvent;
+import sx.blah.discord.handle.obj.IChannel;
 
 public class MineCordEventHandler
 {
@@ -15,13 +15,10 @@ public class MineCordEventHandler
 	@SideOnly(Side.SERVER)
 	public void on(ServerChatEvent args)
 	{
-		TextChannel channel = MineCord.discordApi.getTextChannelById(MineCord.config.getDiscordPostChannel());
+		IChannel channel = MineCord.discordApi.getChannelByID(MineCord.config.getDiscordPostChannel());
 		if (channel != null)
 		{
-			if (channel.canTalk())
-				channel.sendMessage(String.format("<%s> %s", args.username, args.message)).queue();
-			else
-				Lumberjack.err("Configured discordPostChannelId does not have the required permissions to post!");
+			channel.sendMessage(String.format("<%s> %s", args.username, args.message));
 		}
 		else
 			Lumberjack.err("Configured discordPostChannelId does not exist!");

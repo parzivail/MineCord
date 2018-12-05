@@ -1,25 +1,25 @@
 package com.parzivail.minecord;
 
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-public class MessageListener extends ListenerAdapter
+public class MessageListener
 {
-	@Override
+	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent event)
 	{
 		if (event.getAuthor().isBot())
 			return;
 
-		if (event.getMessage().getContentDisplay().equalsIgnoreCase("~minecord-ping"))
-			event.getChannel().sendMessage("Pong!").queue();
+		if (event.getMessage().getFormattedContent().equalsIgnoreCase("~minecord-ping"))
+			event.getChannel().sendMessage("Pong!");
 		else
 		{
-			if (event.getChannel().getIdLong() == MineCord.config.getDiscordListenChannel())
+			if (event.getChannel().getLongID() == MineCord.config.getDiscordListenChannel())
 			{
 				synchronized (MineCord.messageQueue)
 				{
-					MineCord.messageQueue.add(new MessageQueueEntry(event.getAuthor().getName(), event.getMessage().getContentStripped()));
+					MineCord.messageQueue.add(new MessageQueueEntry(event.getAuthor().getName(), event.getMessage().getFormattedContent()));
 				}
 			}
 		}
